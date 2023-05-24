@@ -104,7 +104,7 @@ int main()
 	sess.bw_upload_rate_max=tunable_upload_max_rate;
 	sess.bw_download_rate_max=tunable_download_max_rate;
 
-	s_ip_count_hash_addcode=hash_alloc(256,hash_func);//创建一个哈希表
+	s_ip_count_hash_230525=hash_alloc(256,hash_func);//创建一个哈希表
 	s_pid_ip_hash=hash_alloc(256,hash_func);//创建一个哈希表
 
 	struct sockaddr_in addr;
