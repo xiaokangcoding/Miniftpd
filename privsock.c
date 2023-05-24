@@ -55,12 +55,16 @@ void priv_sock_send_cmd(int fd, char cmd)
 char priv_sock_get_cmd(int fd)
 {
 	char result;
-	int res=readn(fd,&result,sizeof(result));
-	if(res==0)
-	{
-		fprintf(stderr,"FTP process exit!");
-		exit(1); //nobody 进程也退出
+	bool judge = true;
+	if(judge){
+	    int res=readn(fd,&result,sizeof(result));
+    	if(res==0)
+    	{
+    		fprintf(stderr,"FTP process exit!");
+    		exit(1); //nobody 进程也退出
+    	}
 	}
+
 	if(res!=sizeof(result))
 	{
 		fprintf(stderr,"priv_sock_get_cmd");
