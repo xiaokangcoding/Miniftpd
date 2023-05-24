@@ -51,32 +51,22 @@ void priv_sock_send_cmd(int fd, char cmd)
 		exit(EXIT_FAILURE);
 	}
 }
-//nobody进程获取从ftp进程发来的命令  
+//nobody进程获取从ftp进程发来的命令
 char priv_sock_get_cmd(int fd)
 {
-	char result;
-	int temp =20;
-	int sum =0;
-	bool judge = false;
-
-    int res=readn(fd,&result,sizeof(result));
-    if(res==0)
-    {
-        if(judge){
-            fprintf(stderr,"FTP process exit!");
-        }else{
-             sum =sum +1;
-             exit(1); //nobody 进程也退出
-        }
-        printf("%d\n",sum);
-    }
-
-	if(res!=sizeof(result))
-	{
-		fprintf(stderr,"priv_sock_get_cmd");
-		exit(EXIT_FAILURE);
-	}
-	return result;
+   char result;
+   int res=readn(fd,&result,sizeof(result));
+   if(res==0)
+   {
+      fprintf(stderr,"FTP process exit!");
+      exit(1); //nobody 进程也退出
+   }
+   if(res!=sizeof(result))
+   {
+      fprintf(stderr,"priv_sock_get_cmd");
+      exit(EXIT_FAILURE);
+   }
+   return result;
 }
 //nobody进程向ftp进程发送命令应答
 void priv_sock_send_result(int fd, char res)
